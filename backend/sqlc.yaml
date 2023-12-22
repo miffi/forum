@@ -1,0 +1,14 @@
+version: "2"
+# cloud:
+#   project: "01HJ5AEC2VMZ1HD2EHYDQ8P934"
+sql:
+  - engine: "postgresql"
+    queries: "cmd/database/query.sql"
+    schema: "cmd/database/query.sql"
+    # database:
+    #   managed: true
+    gen:
+      go:
+        package: "database"
+        out: "cmd/database"
+        sql_package: "pgx/v5"
