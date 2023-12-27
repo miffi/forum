@@ -1,18 +1,22 @@
 package server
 
+import (
+	"github.com/gin-gonic/gin"
+)
+
 type Server interface {
 	Run()
 }
 
 type server struct {
-	CORSHeader string
+	router *gin.Engine
 }
 
 func New(CORSHeader string) Server {
-	return &server{CORSHeader: CORSHeader}
+	r := router(CORSHeader)
+	return &server{router: r}
 }
 
-func (*server) Run() {
-	r := router()
-	r.Run()
+func (server *server) Run() {
+	server.router.Run()
 }

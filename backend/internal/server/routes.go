@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func router() *gin.Engine {
+func router(CORSHeader string) *gin.Engine {
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
 
