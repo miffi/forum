@@ -1,0 +1,4 @@
+set dotenv-load
+
+backend:
+  (cd cmd/server/; go run server.go)
