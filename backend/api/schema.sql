@@ -1,0 +1,23 @@
+CREATE TABLE users (
+  user_id BIGSERIAL PRIMARY KEY,
+  name VARCHAR(50) UNIQUE NOT NULL,
+  password_hash CHAR(60) NOT NULL,
+  is_administrator BOOLEAN DEFAULT FALSE,
+  created_on DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE posts (
+  post_id BIGSERIAL PRIMARY KEY,
+  user_id BIGSERIAL REFERENCES users (name),
+  title VARCHAR(150) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comments (
+  comment_id BIGSERIAL PRIMARY KEY,
+  post_id BIGSERIAL REFERENCES posts (post_id) ON DELETE CASCADE,
+  user_id BIGSERIAL REFERENCES users (name),
+  body VARCHAR(2000) NOT NULL CONSTRAINT comment_not_empty CHECK (body <> ''),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  edited_at TIMESTAMP
+);
